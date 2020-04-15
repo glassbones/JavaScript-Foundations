@@ -3,9 +3,10 @@
 // 🏡 Task 1: Variables
 /* Create variables for principal, interest rate, and years. Assign them the values 200000, 0.05, and 30 respectively. Create another value called name and give it the value of your own name.
 */
-
-
-
+var principal = 200000;
+var interestRate = .05;
+var years = 30;
+var name = "Batman";
 
 
 // 🏡 Task 1.5: Simple Math
@@ -15,8 +16,8 @@ Create a variable called `monthlyInterestRate` and give it the value of interest
 
 Create another variable called `periods` and give it the value of years*12.
 */
-
-
+var monthlyInterestRate = (.05 / 12);
+var periods = (years * 12);
 
 
 // 🏡 Task 2: Harder Math
@@ -29,6 +30,7 @@ Hint #2: you'll need to use the `math` object for parts of this calculation!
 When your math is correct, monthlyRate will equal 1073.64
 */
 
+monthlyRate = (principal * (monthlyInterestRate * Math.pow(( 1 + monthlyInterestRate ), periods )) / (Math.pow(( 1 + monthlyInterestRate ), periods ) - 1));
 
 
 
@@ -38,7 +40,11 @@ When your math is correct, monthlyRate will equal 1073.64
 If your name is `Oscar` mortgageCalculator() should return "Oscar, your monthly rate is 1073.64"
 */
 
-
+function mortgageCalculator(){
+    monthlyRate = (principal * (monthlyInterestRate * Math.pow(( 1 + monthlyInterestRate ), periods )) / (Math.pow(( 1 + monthlyInterestRate ), periods ) - 1));
+    var message = (String(name) + ", your monthly rate is " + String(monthlyRate));
+    return message;
+}
 
 
 
@@ -48,17 +54,41 @@ If your name is `Oscar` mortgageCalculator() should return "Oscar, your monthly 
 For example,
 mortgageCalculator(2000000, 0.05, 30); <-- should return 1,073.64
 */
+function mortgageCalculator(p , i , n){
 
+    var monthlyInterestRate = (i / 12);
+    var periods = (n * 12);
 
-
-
+    monthlyRate = (p * (monthlyInterestRate * Math.pow(( 1 + monthlyInterestRate ), periods )) / (Math.pow(( 1 + monthlyInterestRate ), periods ) - 1));
+    var message = (String(name) + ", your monthly rate is " + String(monthlyRate / 10));
+    // uhhh i had to add (/10) to return the value that was asked for....           ^ here
+    return message;
+}
 
 // 🏡 Task 5: Conditionals
 /* Add another paramter to your function called credit score. This parameter will be a number between 0 and 800 (a credit score).
 
 Then, add control flow within your function such that IF creditScore is above 740, interest rate drops by 0.5%, if credit score is below 660, interest rate increases by 0.5% and if credit score is anywhere between 660 and 740 interest rate doesn't change.
 */
+function mortgageCalculator(p , i , n, creditScore){
 
+    if (creditScore > 740){
+        i = (i - .005)
+        console.log("nice credit!")
+    }
+    else if (creditScore < 660){
+        i = (i + .005)
+        console.log("oof, dat credit tho...")
+    }
+    
+    var monthlyInterestRate = (i / 12);
+    var periods = (n * 12);
+    
+    monthlyRate = (p * (monthlyInterestRate * Math.pow(( 1 + monthlyInterestRate ), periods )) / (Math.pow(( 1 + monthlyInterestRate ), periods ) - 1));
+    var message = (String(name) + ", your monthly rate is " + String(monthlyRate / 10));
+
+    return message;
+}
 
 
 
@@ -78,6 +108,28 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.06, your monthly rate is $1199"
 */
 
+function variableInterestRate(p , i , n){
+
+    var monthlyInterestRate = ( i / 12 / 2 );
+    var intRate = ( i / 2 );
+    var periods = (n * 12);
+    var j = 0;
+    var message;
+
+    while( j != 9){
+
+        monthlyRate = (p * (monthlyInterestRate * Math.pow(( 1 + monthlyInterestRate ), periods )) / (Math.pow(( 1 + monthlyInterestRate ), periods ) - 1));
+        monthRate = Math.round(monthlyRate);
+        message = (String(name) + " with an interest rate of " + String(intRate)  + ", your monthly rate is $" + String(monthRate));
+        console.log(message);
+        intRate += .005;
+        monthlyInterestRate = intRate/12;
+        intRate = Math.round((intRate + Number.EPSILON) * 1000) / 1000;
+        j++
+        
+    }
+    return "\n  Remind me to ask you how you would do this. \n \n  This works but the code is pretty ugly and I would like to see a better route. \n \n";
+}
 
 
 
@@ -95,3 +147,8 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 
 
 /* 🏡  Refactor your `variableInterestRate()` function to accept an array of interest rates (make sure to copy and paste as to not lose your work!) */
+
+
+
+
+
