@@ -138,17 +138,64 @@ function variableInterestRate(p , i , n){
 /* Attempt any of the stretch goals below once you have finished the work above. Remember as always, these may require additional research beyond what you learned today */
 
 /*  🏡 Add  `Property Tax`, `Homeowner's insurance` and `HOA fees` as parameters in your function to calculate total monthly spending on housing */
+/*  🏡 Explore using `window.prompt()` to allow a user to input parameters in the browser */
+
+function billsCalc(){
+    let p = parseFloat(window.prompt("What is the total amount of you mortgage loan?"));
+    let i = parseFloat(window.prompt("What is the intrest rate of you mortgage?"));
+    let n = parseFloat(window.prompt("How many monthly mortgage payments are you making?"));
+    let pTax = parseFloat(window.prompt("How much do property taxes cost you on a monthly basis?"));
+    let homeIns = parseFloat(window.prompt("How much does your home insurace cost each month?"));
+    let hOA = parseFloat(window.prompt("What are your monthly HOA fees?"));
+
+    var str = (item) => String(item);
+    var txt = (billName) =>  " your monthly " + (billName) + " fee is $" ;
+    var txt2 = (billName) =>  "Your monthly " + (billName) + " fee is $" ;
+    var deci = (num) => Math.round((num + Number.EPSILON) * 100) / 100;
+
+
+    var monthlyInterestRate = (i / 12);
+    var periods = (n * 12);
+
+    monthlyRate = (p * (monthlyInterestRate * Math.pow(( 1 + monthlyInterestRate ), periods )) / (Math.pow(( 1 + monthlyInterestRate ), periods ) - 1));
+    var message =
+    "\n" + (str(name) + "," + txt("mortgage") + str(deci(monthlyRate)) + ".\n" 
+    + txt2("property tax") + str(deci(pTax)) + ".\n"
+    + txt2("home insurance")+ str(deci(homeIns)) + ".\nFinally," 
+    + txt("home owners association") + str(deci(hOA)) 
+    + "\n\nThis all amounts to a grand total of $" + str(deci(monthlyRate + pTax + homeIns + hOA)) + "." );
+      return message;
+    
+}
 
 
 /* 🏡 Build a calculator function that accepts `monthly payment` and `interest rate` and returns the maximum loan that a person could afford */
 
 
-/* 🏡 Explore using `window.prompt()` to allow a user to input parameters in the browser */
+function mathIsHard(){
+    console.log(" :( ");
+}
+
 
 
 /* 🏡  Refactor your `variableInterestRate()` function to accept an array of interest rates (make sure to copy and paste as to not lose your work!) */
 
+let array = [.02, .025, .03, .035];
 
 
+function variableInterestRateArray(p , i , n){
 
+    let loop = i.length - 1;
+    while (loop >= 0){
+        console.log("");
+
+            var monthlyInterestRate = (parseFloat((i[loop])) / 12);
+            var periods = (n * 12);
+            var deci = (num) => Math.round((num + Number.EPSILON) * 100) / 100;
+        
+            monthlyRate = deci((p * (monthlyInterestRate * Math.pow(( 1 + monthlyInterestRate ), periods )) / (Math.pow(( 1 + monthlyInterestRate ), periods ) - 1)));
+            console.log("Monthly Rate = $" + String(deci(monthlyRate)) + "\nIntrest Rate = " + String(deci((i[loop]*100))) + "%");
+        loop--
+    }
+}
 
